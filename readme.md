@@ -2,10 +2,13 @@
 
 parse command line options for the GCC compiler
 
+"what would gcc do?"
+
 ## features
 
 what can `gcc-options-parser` do?
 
+* parse all gcc "binary" options (binary: consume the next argument). in gcc's `*.opt` files, these options have the `Separate` keyword.
 * parse input paths and input languages
   * gcc's [-x language](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html) option allows the user to override the input file extension. this setting is applied to all following input files.
   * with `-x none`, gcc goes back to the default "parse language from file extension" mode.
@@ -18,6 +21,11 @@ what can `gcc-options-parser` do?
 what will `gcc-options-parser` NOT do?
 
 * validate "unary" options (options which do not consume the next argument).
+
+## concept
+
+the parser is generated from gcc's opt files,
+for example [gcc/common.opt](https://github.com/gcc-mirror/gcc/blob/master/gcc/common.opt)
 
 ## use case
 
@@ -45,6 +53,10 @@ so, i want to split the compilation into
 * one compile step
 * one "binary postprocessor" step, so we need the output path
 
+solution: a wrapper script for gcc, which understands some gcc options,
+which can split the compilation into phases,
+which can manipulate the intermediary files.
+
 ### example
 
 the input is something like
@@ -62,3 +74,16 @@ gcc -o /out/output.o -frandom-seed=asdf -D PREFIX=/some/variable/path \
 * postprocess /tmp/source1.i
 * postprocess /tmp/source2.ii
 * compile /tmp/source1.i + /tmp/source2.ii &rarr; /out/output.o
+
+## related
+
+### parse arguments from array
+
+* https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+  * https://stackoverflow.com/a/38297066/10440128 &rarr; https://github.com/matejak/argbash cli parser generator
+  * https://stackoverflow.com/a/63413837/10440128 &rarr; https://github.com/ko1nksm/getoptions cli parser generator
+
+### parse arguments from string
+
+here: parse arguments from file, via [gcc's @file option](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html)
+
