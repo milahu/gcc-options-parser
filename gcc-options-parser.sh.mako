@@ -152,27 +152,26 @@ do
       [ -n "$oPath" ] && { echo "error: can have only one output"; exit 1; }
       if [ "$a" != "-o" ]; then ${"oPath=${a:2}"}; else : $((i++)); ${"oPath=${args[$i]}"}; fi
       echo "o: $oPath"
-      ;;
+    ;;
     -x*)
       if [ "$a" != "-x" ]; then ${"iLang=${a:2}"}; else : $((i++)); ${"iLang=${args[$i]}"}; fi
       echo "f: $iLang"
-      ;;
+    ;;
     ${"|".join(separate_options)})
       : $((i++))
       ${"b=${args[$i]}"}
       echo "2: $a $b"
       #parsedArgs+=("$a" "$b")
-      ;;
+    ;;
     -*)
       echo "1: $a"
       #parsedArgs+=("$a")
-      ;;
+    ;;
     *)
       echo "i: $a [format: $iLang]"
       iPathList+=("$a")
       # TODO if $iLang == "none", parse language from file extension
       iLangList+=("$iLang")
-      ;;
-esac
-
+    ;;
+  esac
 done
