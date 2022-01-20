@@ -143,7 +143,12 @@ constArgs=()
 # default values
 inPathList=()
 inLangList=() # TODO use these in the last compile/assemble/link step only for the unprocessed files
-inLang=none
+inLang=none<%doc>
+  default language depends on the compiler.
+  g++ -> default language is c++, agnostic of file extension.
+  -> g++ will parse *.c files as c++ files.
+  see https://github.com/mozilla/sccache/issues/748
+</%doc>
 oPath=a.out
 <%doc>
   see "-o file" in https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
@@ -167,7 +172,7 @@ oPath=a.out
 cLangExtPatt=" c h C H cc hh cpp hpp cxx hxx c++ h++ CPP HPP cp hp tcc "
 
 declare -A tmpExtOfInExt
-tmpExtOfInExt=( [c]=i [h]=gch [C]=i [H]=gch [cc]=ii [hh]=gch [cpp]=ii [hpp]=gch [cxx]=ii [hxx]=gch [c++]=ii [h++]=gch [CPP]=ii [HPP]=gch [cp]=ii [hp]=gch [tcc]=ii )
+tmpExtOfInExt=( [c]=i [h]=gch [C]=ii [H]=gch [cc]=ii [hh]=gch [cpp]=ii [hpp]=gch [cxx]=ii [hxx]=gch [c++]=ii [h++]=gch [CPP]=ii [HPP]=gch [cp]=ii [hp]=gch [tcc]=ii )
 
 # when should gcc stop?
 <%doc> https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html </%doc>
