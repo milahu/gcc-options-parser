@@ -18,7 +18,7 @@ oPath=a.out
 cLangExtPatt=" c h C H cc hh cpp hpp cxx hxx c++ h++ CPP HPP cp hp tcc "
 
 declare -A tmpExtOfInExt
-tmpExtOfInExt=( [c]=i [h]=gch [C]=i [H]=gch [cc]=ii [hh]=gch [cpp]=ii [hpp]=gch [cxx]=ii [hxx]=gch [c++]=ii [h++]=gch [CPP]=ii [HPP]=gch [cp]=ii [hp]=gch [tcc]=ii )
+tmpExtOfInExt=( [c]=i [h]=gch [C]=ii [H]=gch [cc]=ii [hh]=gch [cpp]=ii [hpp]=gch [cxx]=ii [hxx]=gch [c++]=ii [h++]=gch [CPP]=ii [HPP]=gch [cp]=ii [hp]=gch [tcc]=ii )
 
 # when should gcc stop?
 
